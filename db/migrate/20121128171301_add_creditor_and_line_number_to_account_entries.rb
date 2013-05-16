@@ -23,9 +23,9 @@ class AddCreditorAndLineNumberToAccountEntries < ActiveRecord::Migration
     ['Acceptance', 'Rejection'].each do |t|
       execute "UPDATE friend_permissions set type = 'Friend::#{t}' WHERE type = '#{t}'"
     end
-    
 
-    add_column :account_entries, :creditor, :boolean, :null => false, :default => 0
+
+    add_column :account_entries, :creditor, :boolean, :null => false, :default => false
     add_column :account_entries, :line_number, :integer, :null => false, :default => 0
 
     prev_deal_id = nil
