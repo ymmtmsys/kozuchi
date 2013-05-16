@@ -93,7 +93,6 @@ class Deal::General < Deal::Base
       :joins => "inner join account_entries on account_entries.deal_id = deals.id",
     :group => "account_entries.summary",
     :conditions => ["account_entries.summary like ?", "#{keyword}%"],
-    :order => "deals.id desc",
     :limit => 5
     }
   }
@@ -148,7 +147,7 @@ class Deal::General < Deal::Base
     end
     return false
   end
-  
+
   def entry(account_id)
     raise "no account_id in Deal::General.entry()" unless account_id
     r = entries.detect{|e| e.account_id.to_s == account_id.to_s}
@@ -204,7 +203,7 @@ class Deal::General < Deal::Base
       modify_errors_for_complex_form # ないはずだがその場合は変える
       return
     end
-    
+
     # 金額のエラーは借方表現だけにして、日本語は金額に (国際化まかせ)
     if errors[:"debtor_entries.amount"].present?
       errors.delete(:"creditor_entries.amount")
